@@ -17,7 +17,7 @@ export function TaskFormPage() {
   const onSubmit = handleSubmit(async (data) => {
     if (params.id) {
       await updateTask(params.id, data);
-      toast.success("Task updated", {
+      toast.success("Reserva actualizada", {
         position: "bottom-right",
         style: {
           background: "#101010",
@@ -26,7 +26,7 @@ export function TaskFormPage() {
       });
     } else {
       await createTask(data);
-      toast.success("New Task Added", {
+      toast.success("Reserva añadida", {
         position: "bottom-right",
         style: {
           background: "#101010",
@@ -42,7 +42,7 @@ export function TaskFormPage() {
     async function loadTask() {
       if (params.id) {
         const { data } = await getTask(params.id);
-        setValue("title", data.title);
+        setValue("fullname", data.title);
         setValue("description", data.description);
       }
     }
@@ -54,24 +54,48 @@ export function TaskFormPage() {
       <form onSubmit={onSubmit} className="bg-zinc-800 p-10 rounded-lg mt-2">
         <input
           type="text"
-          placeholder="Title"
-          {...register("title", { required: true })}
+          placeholder="Nombre completo"
+          {...register("fullname", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
           autoFocus
         />
 
-        {errors.title && <span>This field is required</span>}
+        {errors.fullname && <span>Llenar correctamente</span>}
 
         <textarea
-          placeholder="Description"
+          placeholder="Notas generales"
           {...register("description", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg block w-full"
         />
 
-        {errors.description && <span>This field is required</span>}
+        {errors.description && <span>Llenar correctamente</span>}
+
+        <label htmlFor="reservation_date">Fecha de la Reserva:</label>
+        <input
+          type="date"
+          id="reservation_date"
+          {...register("reservation_date")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+        />
+
+        <label htmlFor="reservation_time">Hora de la Reserva:</label>
+        <input
+          type="time"
+          id="reservation_time"
+          {...register("reservation_time")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+        />
+
+        <label htmlFor="number_of_guests">Número de Invitados:</label>
+        <input
+          type="number"
+          id="number_of_guests"
+          {...register("number_of_guests")}
+          className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
+        />
 
         <button className="bg-indigo-500 p-3 rounded-lg block w-full mt-3">
-          Save
+          Guardar
         </button>
       </form>
 
@@ -80,10 +104,10 @@ export function TaskFormPage() {
           <button
             className="bg-red-500 p-3 rounded-lg w-48 mt-3"
             onClick={async () => {
-              const accepted = window.confirm("Are you sure?");
+              const accepted = window.confirm("¿Está seguro?");
               if (accepted) {
                 await deleteTask(params.id);
-                toast.success("Task Removed", {
+                toast.success("Reserva removida", {
                   position: "bottom-right",
                   style: {
                     background: "#101010",

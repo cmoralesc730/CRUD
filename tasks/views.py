@@ -1,8 +1,8 @@
 from rest_framework import viewsets
-from .serializer import TaskSerializer
-from .models import Task
+from .serializer import ReservationSerializer
+from .models import Reservation
 
 # Create your views here.
 class TaskView(viewsets.ModelViewSet):
-    serializer_class = TaskSerializer
-    queryset = Task.objects.all()
+    serializer_class = ReservationSerializer
+    queryset = Reservation.objects.all()

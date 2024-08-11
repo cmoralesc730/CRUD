@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Task
+from .models import Reservation
 
-class TaskSerializer(serializers.ModelSerializer):
+class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Task
-        # fields = ('id', 'title', 'description', 'done')
-        fields = '__all__'
+        model = Reservation
+        fields = ('id', 'fullname', 'description', 'reservation_date', 'reservation_time', 'number_of_guests')
+        read_only_fields = ('id')
