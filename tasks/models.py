@@ -11,4 +11,4 @@ class Reservation(models.Model):
     number_of_guests = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"Reservación para {self.number_of_guests} personas el {self.reservation_date} a las {self.reservation_time}"
+        return f"Reservación para {self.number_of_guests} personas, el {self.reservation_date} a las {self.reservation_time}"
